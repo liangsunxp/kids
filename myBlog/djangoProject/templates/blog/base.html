@@ -1,12 +1,72 @@
-<!-- templates/blog/post_detail.html -->
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
 
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .nav_container {
+            display: flex;
+            justify-content: center; /* 居中导航栏容器 */
+            align-items: center;
+            background-color: #333;
+            padding: 10px;
+            height: 50px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between; /* 使链接和博客名称分布在两端 */
+            align-items: center;
+            width: 1200px;
+        }
+
+        .nav-links, .blog-name {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .navbar a:hover {
+            background-color: #383737;
+        }
+
+        .content {
+            padding: 20px;
+            margin: 0 auto;
+            width: 1200px;
+        }
+
+        .blog-name {
+            color: white; /* 博客名称的颜色 */
+            font-size: 30px; /* 可以根据需要调整大小 */
+        }
+    </style>
 </head>
 <body>
-<div id='app'>
-    
+<div class="nav_container">
+    <div class="navbar">
+        <div class="nav-links">
+            <a href="/">首页</a>
+            <a href="/categories">分类</a>
+            <a href="/tags">标签</a>
+        </div>
+        <div class="blog-name">孙亮的博客</div>
+    </div>
 </div>
+{% block content %}
+{% endblock %}
 </body>
 </html>

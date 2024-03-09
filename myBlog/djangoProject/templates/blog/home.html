@@ -1,12 +1,10 @@
-<!-- templates/blog/post_detail.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ post.title }}</title>
-</head>
-<body>
-<h1>{{ post.title }}</h1>
-<p>发布于 {{ post.publish_date }}</p>
-<div>{{ post.content|linebreaks }}</div>
-</body>
-</html>
+{% extends "blog/base.html" %}
+
+{% block title %}主页{% endblock %}
+
+{% block content %}
+
+    <div id="app" class="content">
+        <h1>欢迎来到我的博客</h1>
+    </div>
+{% endblock %}
