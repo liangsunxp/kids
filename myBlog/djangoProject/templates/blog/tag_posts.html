@@ -1,12 +1,32 @@
-<!-- templates/blog/post_detail.html -->
 <!DOCTYPE html>
 <html>
 <head>
     <title>{{ post.title }}</title>
+    <!-- 引入Vue -->
+    <script src="https://unpkg.com/vue@2.6.12/dist/vue.min.js"></script>
+    <!-- 引入Vue-Markdown-It -->
+    <script src="https://unpkg.com/vue-markdown-it/dist/vue-markdown-it.umd.min.js"></script>
 </head>
 <body>
-<h1>{{ post.title }}</h1>
-<p>发布于 {{ post.publish_date }}</p>
-<div>{{ post.content|linebreaks }}</div>
+<div id="app">
+    <h1>{{ post.title }}</h1>
+    <p>发布于 {{ post.publish_date }}</p>
+    <!-- 使用VueMarkdownIt组件渲染Markdown，注意这里使用了修改后的插值符号 -->
+    <vue-markdown-it>[[ postContent ]]</vue-markdown-it>
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        delimiters: ['[[', ']]'], // 修改Vue的插值符号
+        components: {
+            VueMarkdownIt: window['vue-markdown-it']
+        },
+        data: {
+            // 直接将Django模板变量的内容赋值给Vue数据属性
+            postContent: `{{ post.content|safe }}`
+        }
+    });
+</script>
 </body>
 </html>
