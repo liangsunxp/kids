@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 from .models import Post, Category, Tag
 
@@ -8,8 +9,13 @@ def post_detail(request, slug):
 
 
 def home(request):
-    posts = Post.objects.filter(status='published').order_by('-publish_date')
-    return render(request, 'blog/home.html', {'posts': posts})
+    posts_list = Post.objects.filter(status='published').order_by('-publish_date')
+    paginator = Paginator(posts_list, 10)  # 每页10篇文章
+
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'blog/home.html', {'page_obj': page_obj})
 
 
 def category_posts(request, category_slug):

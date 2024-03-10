@@ -3,8 +3,53 @@
 {% block title %}主页{% endblock %}
 
 {% block content %}
-
-    <div id="app" class="content">
-        <h1>欢迎来到我的博客</h1>
+    <div class="content">
+        <div id="app">
+            {% for post in page_obj %}
+                <div class="post">
+                    <h2><a href="{% url 'post_detail' slug=post.slug %}" class="post-link">{{ post.title }}</a></h2>
+                    <p>发布于 {{ post.publish_date|date:"Y-m-d H:i" }}</p>
+                </div>
+            {% empty %}
+                <p>没有找到任何文章。</p>
+            {% endfor %}
+            <div class="pagination">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}">上一页</a>
+                {% endif %}
+                <span>页码 {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">下一页</a>
+                {% endif %}
+            </div>
+        </div>
     </div>
+
+    <style>
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .pagination span {
+            margin: 0 10px;
+        }
+
+        .post-link {
+            color: #013a75; /* 深蓝色 */
+            text-decoration: none; /* 去掉下划线 */
+        }
+
+        .post-link:hover {
+            color: #fa4141; /* 鼠标悬停时变为红色 */
+        }
+    </style>
+
 {% endblock %}
