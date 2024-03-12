@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('post/<slug:slug>/', views.post_detail, name='post_detail'),
     path('home/', views.home, name='home'),
+    path('', views.home, name='home'),
 ]

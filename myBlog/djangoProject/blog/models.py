@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils.text import slugify
+from slugify import slugify
 
 
 class Category(models.Model):
@@ -51,8 +51,7 @@ class Post(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.title)
+        self.slug = slugify(self.title)
         super(Post, self).save(*args, **kwargs)
 
 
@@ -73,6 +72,5 @@ class Image(models.Model):
 
     def save(self, *args, **kwargs):
         # 自动生成slug，如果没有提供slug，则从标题生成
-        if not self.slug:
-            self.slug = slugify(self.title)
+        self.slug = slugify(self.title)
         super(Image, self).save(*args, **kwargs)
