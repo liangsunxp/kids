@@ -18,6 +18,18 @@ def home(request):
     return render(request, 'blog/home.html', {'page_obj': page_obj})
 
 
+def categories(request):
+    # 我需要每个分类下的文章数量
+    categories = Category.objects.all()
+    return render(request, 'blog/categories.html', {'categories': categories})
+
+
+def tags(request):
+    # 我需要每个标签下的文章数量
+    tags = Tag.objects.all()
+    return render(request, 'blog/tags.html', {'tags': tags})
+
+
 def category_posts(request, category_slug):
     category = get_object_or_404(Category, slug=category_slug)
     posts = Post.objects.filter(category=category, status='published')

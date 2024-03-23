@@ -1,41 +1,70 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ post.title }}</title>
-    <!-- 引入Vue -->
+{% extends "blog/base.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
     <script src="https://unpkg.com/vue@2.6.12/dist/vue.min.js"></script>
     <!-- 引入Vue-Markdown-It -->
     <script src="https://unpkg.com/marked@12.0.1/lib/marked.umd.js"></script>
-</head>
-<body>
-<div id="app">
-    <h1>{{ post.title }}</h1>
-    <p>发布于 {{ post.publish_date }}</p>
-    <!-- 使用vue-markdown-it组件来渲染Markdown内容 -->
-    <div v-html="markdownToHtml(postContent)">
-    </div>
-</div>
 
-<script>
-    new Vue({
-        el: '#app',
-        delimiters: ['[[', ']]'], // 修改Vue的插值符号
-        components: {
-            VueMarkdownIt: window['vue-markdown-it']
-        },
-        data() {
-            return {
-                // 将Django模板变量安全地传递给Vue
-                postContent: `{{ post.content | safe }}`
-            };
-        },
-        methods: {
-            // 将Markdown内容转换为HTML
-            markdownToHtml(markdown) {
-                return marked.parse(markdown);
-            }
-        },
-    });
-</script>
-</body>
-</html>
+    <div class="content">
+        <div id="app">
+            <h1>{{ post.title }}</h1>
+            <p>发布于 {{ post.publish_date }}</p>
+            <!-- 使用vue-markdown-it组件来渲染Markdown内容 -->
+            <div v-html="markdownToHtml(postContent)">
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .pagination span {
+            margin: 0 10px;
+        }
+
+        .post-link {
+            color: #013a75; /* 深蓝色 */
+            text-decoration: none; /* 去掉下划线 */
+        }
+
+        .post-link:hover {
+            color: #fa4141; /* 鼠标悬停时变为红色 */
+        }
+    </style>
+
+    <script>
+        new Vue({
+            el: '#app',
+            delimiters: ['[[', ']]'], // 修改Vue的插值符号
+            components: {
+                VueMarkdownIt: window['vue-markdown-it']
+            },
+            data() {
+                return {
+                    // 将Django模板变量安全地传递给Vue
+                    postContent: `{{ post.content | safe }}`
+                };
+            },
+            methods: {
+                // 将Markdown内容转换为HTML
+                markdownToHtml(markdown) {
+                    return marked.parse(markdown);
+                }
+            },
+        });
+    </script>
+
+{% endblock %}
+
