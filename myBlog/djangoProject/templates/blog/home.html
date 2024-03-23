@@ -8,7 +8,20 @@
             {% for post in page_obj %}
                 <div class="post">
                     <h2><a href="{% url 'post_detail' slug=post.slug %}" class="post-link">{{ post.title }}</a></h2>
-                    <p>发布于 {{ post.publish_date|date:"Y-m-d H:i" }}</p>
+                    <p>
+                        <!-- 显示分类 -->
+                        <span> <a class="category-link"
+                                  href="{% url 'category_posts' category_slug=post.category.slug %}">{{ post.category.name }}</a>
+                            <!-- 显示标签 -->
+                        </span>
+                        <span>
+                            标签
+                            {% for tag in post.tags.all %}
+                                <a class="tag-link" href="{% url 'tag_posts' tag_slug=tag.slug %}">{{ tag.name }}</a>
+                            {% endfor %}
+                        </span>
+                        <span>发布于 {{ post.publish_date|date:"Y-m-d H:i" }}</span>
+                    </p>
                 </div>
             {% empty %}
                 <p>没有找到任何文章。</p>
@@ -26,30 +39,75 @@
     </div>
 
     <style>
+        /* 文章标题样式 */
+        .post-link {
+            color: #013a75; /* 保持深蓝色，突出显示 */
+            font-weight: bold; /* 增加字体粗细 */
+            text-decoration: none; /* 去掉下划线 */
+            font-size: 22px; /* 增加字体大小 */
+        }
+
+        /* 在文章之间增加更多空间 */
+        .post {
+            margin-bottom: 30px; /* 增加文章间距 */
+        }
+
+        /* 分类链接样式 */
+        .category-link {
+            color: #004f47; /* 淡绿色，与标题区分 */
+            text-decoration: none; /* 去掉下划线 */
+        }
+
+        /* 标签链接样式 */
+        .tag-link {
+            color: #795548; /* 淡棕色，与标题区分 */
+            background-color: #f0f0f0; /* 轻灰色背景 */
+            border-radius: 5px; /* 圆角边框 */
+            padding: 2px 2px; /* 内边距 */
+            margin-right: 5px; /* 右边距 */
+            margin-left: 5px; /* 左边距 */
+            display: inline-block; /* 使边距和圆角有效 */
+            text-decoration: none; /* 去掉下划线 */
+        }
+
+        span {
+            margin-right: 10px; /* 增加右边距 */
+            font-size: 13px;
+            color: #2c2b2b;
+        }
+
+        span a {
+            font-size: 15px;
+        }
+
+        /* 鼠标悬停在分类和标签上时的样式 */
+        .category-link:hover, .tag-link:hover {
+            color: #fa4141; /* 鼠标悬停时变为红色 */
+            background-color: #ffe0e0; /* 对于标签，增加背景色变化 */
+        }
+
+        .pagination a, .pagination span {
+            font-size: 16px; /* 调整分页链接的字体大小 */
+        }
+
+        /* 以下是额外的样式，确保它们与你的网站设计协调一致 */
         .pagination {
             display: flex;
             justify-content: center;
             margin-top: 20px;
+            padding-bottom: 20px; /* 增加底部间距 */
         }
 
         .pagination a {
             margin: 0 10px;
             text-decoration: none;
-            color: #007bff;
+            color: #007bff; /* 调整为你喜欢的颜色 */
         }
 
         .pagination span {
             margin: 0 10px;
         }
 
-        .post-link {
-            color: #013a75; /* 深蓝色 */
-            text-decoration: none; /* 去掉下划线 */
-        }
-
-        .post-link:hover {
-            color: #fa4141; /* 鼠标悬停时变为红色 */
-        }
     </style>
 
 {% endblock %}

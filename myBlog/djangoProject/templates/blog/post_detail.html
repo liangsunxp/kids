@@ -44,7 +44,12 @@
         }
     </style>
 
+    
+    {{ post.content|json_script:"post-content" }}
+    
     <script>
+
+
         new Vue({
             el: '#app',
             delimiters: ['[[', ']]'], // 修改Vue的插值符号
@@ -54,8 +59,16 @@
             data() {
                 return {
                     // 将Django模板变量安全地传递给Vue
-                    postContent: `{{ post.content | safe }}`
+                    postContent: ""
                 };
+            },
+            mounted() {
+                const postContentElement = document.getElementById('post-content');
+                if (postContentElement) {
+                    this.postContent = JSON.parse(postContentElement.textContent);
+                } else {
+                    console.error('Post content element not found');
+                }
             },
             methods: {
                 // 将Markdown内容转换为HTML

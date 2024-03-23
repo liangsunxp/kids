@@ -24,5 +24,7 @@ urlpatterns = [
     path('home/', views.home, name='home'),
     path('categories/', views.categories, name='categories'),
     path('tags/', views.tags, name='tags'),
+    path('category/<slug:category_slug>/', views.category_posts, name='category_posts'),
+    path('tag/<slug:tag_slug>/', views.tag_posts, name='tag_posts'),
     path('', views.home, name='home'),
 ]

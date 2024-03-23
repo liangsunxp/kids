@@ -19,6 +19,30 @@ def home(request):
     return render(request, 'blog/home.html', {'page_obj': page_obj})
 
 
+def category_posts(request, category_slug):
+    category = get_object_or_404(Category, slug=category_slug)
+    # 筛选出属于该分类且状态为已发布的所有文章
+    posts_list = Post.objects.filter(category=category, status='published').order_by('-publish_date')
+    paginator = Paginator(posts_list, 10)  # 每页10篇文章
+
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'blog/category_posts.html', {'category': category, 'page_obj': page_obj})
+
+
+def tag_posts(request, tag_slug):
+    tag = get_object_or_404(Tag, slug=tag_slug)
+    # 筛选出包含该标签且状态为已发布的所有文章
+    posts_list = Post.objects.filter(tags=tag, status='published').order_by('-publish_date')
+    paginator = Paginator(posts_list, 10)  # 每页10篇文章
+
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'blog/tag_posts.html', {'tag': tag, 'page_obj': page_obj})
+
+
 def categories(request):
     # 我需要每个分类下的文章数量
     # my_categories = Category.objects.all()
@@ -32,15 +56,3 @@ def tags(request):
     my_tags = Tag.objects.annotate(posts_count=Count('posts')).all()
 
     return render(request, 'blog/tags.html', {'tags': my_tags})
-
-
-def category_posts(request, category_slug):
-    category = get_object_or_404(Category, slug=category_slug)
-    posts = Post.objects.filter(category=category, status='published')
-    return render(request, 'blog/category_posts.html', {'category': category, 'posts': posts})
-
-
-def tag_posts(request, tag_slug):
-    tag = get_object_or_404(Tag, slug=tag_slug)
-    posts = Post.objects.filter(tags=tag, status='published')
-    return render(request, 'blog/tag_posts.html', {'tag': tag, 'posts': posts})

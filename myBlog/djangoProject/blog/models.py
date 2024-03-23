@@ -5,6 +5,7 @@ from slugify import slugify
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name='名称')
+    slug = models.SlugField(max_length=100, unique=True, verbose_name='Slug', null=True, blank=True)
     description = models.TextField(blank=True, verbose_name='描述')
 
     class Meta:
@@ -14,9 +15,14 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Category, self).save(*args, **kwargs)
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name='名称')
+    slug = models.SlugField(max_length=100, unique=True, verbose_name='Slug', null=True, blank=True)
 
     class Meta:
         verbose_name = '标签'
@@ -24,6 +30,10 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Tag, self).save(*args, **kwargs)
 
 
 class Post(models.Model):
