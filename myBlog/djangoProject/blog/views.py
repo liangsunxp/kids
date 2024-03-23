@@ -1,4 +1,5 @@
 from django.core.paginator import Paginator
+from django.db.models import Count
 from django.shortcuts import render, get_object_or_404
 from .models import Post, Category, Tag
 
@@ -20,14 +21,17 @@ def home(request):
 
 def categories(request):
     # 我需要每个分类下的文章数量
-    categories = Category.objects.all()
-    return render(request, 'blog/categories.html', {'categories': categories})
+    # my_categories = Category.objects.all()
+    my_categories = Category.objects.annotate(posts_count=Count('posts')).all()
+    return render(request, 'blog/categories.html', {'categories': my_categories})
 
 
 def tags(request):
     # 我需要每个标签下的文章数量
-    tags = Tag.objects.all()
-    return render(request, 'blog/tags.html', {'tags': tags})
+    # my_tags = Tag.objects.all()
+    my_tags = Tag.objects.annotate(posts_count=Count('posts')).all()
+
+    return render(request, 'blog/tags.html', {'tags': my_tags})
 
 
 def category_posts(request, category_slug):

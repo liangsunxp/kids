@@ -5,7 +5,13 @@
 {% block content %}
     <div class="content">
         <div id="app">
-
+            {% for tag in tags %}
+                <div class="category">
+                    <h4>{{ tag.name }}({{ tag.posts_count }})</h4>
+                </div>
+            {% empty %}
+                <p>没有找到任何分类。</p>
+            {% endfor %}
         </div>
     </div>
 
