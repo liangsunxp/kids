@@ -18,35 +18,39 @@
             align-items: center;
             background-color: #333;
             padding: 10px;
-            height: 50px;
+            height: auto;
         }
 
         .navbar {
             display: flex;
-            justify-content: space-between; /* 使链接和博客名称分布在两端 */
+
             align-items: center;
-            width: 980px;
+            width: 100%;
+            max-width: 980px; /* 或根据需要调整最大宽度 */
         }
 
-        .nav-links, .blog-name {
+        .nav-links {
             display: flex;
             align-items: center;
         }
 
         .navbar a {
             color: white;
-            padding: 10px 15px;
+            padding: 5px 12px;
             text-decoration: none;
-            margin: 0 10px;
+            margin: 5px; /* 调整为较小的间距 */
+            display: inline-block;
+            white-space: nowrap;
         }
 
         .navbar a:hover {
-            background-color: #383737;
+            background-color: #464545;
         }
 
         .blog-name {
-            color: white; /* 博客名称的颜色 */
-            font-size: 30px; /* 可以根据需要调整大小 */
+            color: white;
+            font-size: 26px; /* 调整大小以适应移动屏幕 */
+            margin-right: 20px; /* 调整右边距 */
         }
 
         /* 基本样式 */
@@ -54,24 +58,56 @@
             max-width: 980px; /* 最大宽度为980px */
             margin: 0 auto; /* 居中显示 */
             width: 100%; /* 宽度自适应 */
-            padding: 20px; /* 根据需要调整 */
+            padding: 5px; /* 根据需要调整 */
         }
+
+
+        .footer {
+            background-color: #333; /* 与导航栏颜色保持一致 */
+            color: white; /* 文字颜色 */
+            font-size: 12px; /* 字体大小 */
+            text-align: center; /* 文本居中 */
+            padding: 10px 0; /* 上下填充 */
+            position: fixed; /* 固定在页面底部 */
+            left: 0;
+            bottom: 0;
+            width: 100%; /* 宽度填满屏幕 */
+        }
+
+        .footer a {
+            color: white; /* 链接颜色 */
+            text-decoration: none; /* 移除下划线 */
+            margin: 0; /* 移除外边距 */
+        }
+
+        .footer a:hover {
+            color: #5fb9f1;
+        }
+        
 
         /* 响应式媒体查询 */
         @media (max-width: 980px) {
             .content, .navbar {
                 padding: 10px; /* 在较小屏幕上减小内边距 */
+                flex-direction: column; /* 在小屏幕上垂直排列 */
             }
         }
 
         @media (max-width: 768px) {
-            .nav_container, .navbar, .nav-links, .blog-name {
-                flex-direction: column; /* 在更小屏幕上将导航和博客名称垂直排列 */
-                align-items: center; /* 居中对齐 */
+            .navbar {
+                flex-direction: column; /* 在小屏幕上垂直排列 */
+            }
+
+            .nav-links, .blog-name {
+                width: 100%; /* 在小屏幕上占满整行 */
+                justify-content: center; /* 居中显示 */
+                text-align: center; /* 文本居中 */
             }
 
             .navbar a {
-                margin: 5px 0; /* 调整链接间的间距 */
+                text-align: center; /* 链接文字居中 */
+                padding: 8px; /* 调整内边距 */
+                display: block;
             }
         }
     </style>
@@ -79,15 +115,18 @@
 <body>
 <div class="nav_container">
     <div class="navbar">
+        <div class="blog-name">向量视界</div>
         <div class="nav-links">
             <a href="/">首页</a>
             <a href="/categories">分类</a>
             <a href="/tags">标签</a>
         </div>
-        <div class="blog-name">向量视界</div>
     </div>
 </div>
 {% block content %}
 {% endblock %}
+<div class="footer">
+    <a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2023132625号-2</a>
+</div>
 </body>
 </html>
