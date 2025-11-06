@@ -1,0 +1,176 @@
+Leon Study - 前后端分离项目结构
+================================
+
+leonStudy/
+│
+├── 📄 README.md                    # 项目总体说明
+├── 📄 QUICKSTART.md                # 5分钟快速开始指南 ⭐ 从这里开始
+├── 📄 DEVELOPMENT.md               # 详细开发指南
+├── 📄 PROJECT_STRUCTURE.md         # 项目结构详解
+├── 📄 ARCHITECTURE.md              # 架构设计文档
+├── 📄 TREE.txt                     # 本文件 - 目录树
+├── 📄 .gitignore                   # Git 忽略配置
+├── 📄 .env.example                 # 环境变量示例
+├── 📄 start.sh                     # 启动脚本（macOS/Linux）
+│
+├── 📁 backend/                     # FastAPI 后端应用 ⭐
+│   ├── 📄 main.py                  # 应用入口 - 开始编辑这里
+│   ├── 📄 requirements.txt          # Python 依赖
+│   ├── 📄 .gitignore              # Git 忽略配置
+│   ├── 📄 .env.example            # 环境变量示例
+│   ├── 📄 README.md               # 后端说明
+│   │
+│   └── 📁 app/                     # 应用模块（可选扩展）
+│       ├── __init__.py
+│       ├── 📁 models/              # Pydantic 数据模型
+│       ├── 📁 routes/              # API 路由
+│       ├── 📁 services/            # 业务逻辑
+│       └── 📁 utils/               # 工具函数
+│
+├── 📁 frontend/                    # React + Ant Design Pro 前端 ⭐
+│   ├── 📄 package.json             # 项目依赖和脚本
+│   ├── 📄 vite.config.ts           # Vite 构建配置
+│   ├── 📄 .umirc.ts                # Umi 路由和配置
+│   ├── 📄 tsconfig.json            # TypeScript 配置
+│   ├── 📄 index.html               # HTML 入口
+│   ├── 📄 .gitignore              # Git 忽略配置
+│   ├── 📄 README.md               # 前端说明
+│   │
+│   ├── 📁 src/
+│   │   ├── 📄 index.tsx            # React 入口
+│   │   ├── 📄 index.css            # 全局样式
+│   │   ├── 📄 App.tsx              # 应用根组件
+│   │   ├── 📄 app.tsx              # Umi 配置
+│   │   │
+│   │   ├── 📁 pages/               # 页面组件
+│   │   │   ├── 📄 Dashboard.tsx    # 仪表盘页面
+│   │   │   ├── 📄 Users.tsx        # 用户管理页面
+│   │   │   └── 📄 About.tsx        # 关于页面
+│   │   │
+│   │   ├── 📁 components/          # 公共组件（待创建）
+│   │   │   ├── 📁 Layout/
+│   │   │   ├── 📁 Common/
+│   │   │   └── 📁 Form/
+│   │   │
+│   │   ├── 📁 services/            # API 服务层（待创建）
+│   │   │   ├── 📄 api.ts
+│   │   │   ├── 📄 user.ts
+│   │   │   └── 📄 item.ts
+│   │   │
+│   │   ├── 📁 hooks/               # 自定义 Hooks（待创建）
+│   │   │   ├── 📄 useAuth.ts
+│   │   │   └── 📄 useAsync.ts
+│   │   │
+│   │   └── 📁 stores/              # 状态管理（待创建）
+│   │       ├── 📄 authStore.ts
+│   │       └── 📄 userStore.ts
+│   │
+│   └── 📁 node_modules/            # npm 依赖（自动生成）
+
+└── 📁 .git/                        # Git 版本控制
+
+
+== 快速导航 ==
+
+📌 首先看这些文件：
+   1. QUICKSTART.md        ← 5分钟快速开始
+   2. README.md            ← 项目概览
+   3. ARCHITECTURE.md      ← 系统架构
+
+📌 然后查看这些文件夹：
+   1. backend/main.py      ← 后端代码入口
+   2. frontend/src/        ← 前端代码入口
+
+📌 开发指南：
+   1. DEVELOPMENT.md       ← 完整开发流程
+   2. PROJECT_STRUCTURE.md ← 详细结构说明
+
+📌 启动应用：
+   MacOS/Linux: ./start.sh
+   Windows:     cd backend && python main.py (新终端) + cd frontend && npm run dev
+
+
+== 端口信息 ==
+
+前端应用：  http://localhost:3000
+后端 API：  http://localhost:8102
+API 文档：  http://localhost:8102/docs
+
+
+== 技术栈 ==
+
+前端：
+  ✅ React 18
+  ✅ TypeScript
+  ✅ Ant Design Pro
+  ✅ Vite
+  ✅ Umi 4
+
+后端：
+  ✅ FastAPI
+  ✅ Python 3.8+
+  ✅ Pydantic
+  ✅ Uvicorn
+
+
+== 核心命令 ==
+
+后端：
+  cd backend
+  python -m venv venv
+  source venv/bin/activate  (或 venv\Scripts\activate for Windows)
+  pip install -r requirements.txt
+  python main.py
+
+前端：
+  cd frontend
+  npm install
+  npm run dev
+
+
+== 文件说明 ==
+
+📄 core files:
+   README.md              - 项目完整说明
+   QUICKSTART.md          - 快速开始指南（推荐首先阅读）
+   DEVELOPMENT.md         - 开发人员完整指南
+   ARCHITECTURE.md        - 系统架构设计文档
+   PROJECT_STRUCTURE.md   - 项目结构详细说明
+
+📁 backend/:
+   main.py               - FastAPI 应用主文件（后端所有代码从这里开始）
+   requirements.txt      - Python 依赖列表
+   .env.example          - 环境变量示例
+   README.md             - 后端说明
+
+📁 frontend/:
+   package.json          - npm 项目配置
+   vite.config.ts        - Vite 构建配置
+   .umirc.ts             - Umi 框架配置
+   index.html            - HTML 入口
+   tsconfig.json         - TypeScript 配置
+   README.md             - 前端说明
+   src/                  - 前端源代码目录
+
+
+== 项目状态 ==
+
+✅ 项目结构已初始化
+✅ 前后端分离配置完成
+✅ API 代理配置完成
+✅ CORS 配置完成
+✅ TypeScript 配置完成
+
+🚀 准备开始开发！
+
+
+== 下一步 ==
+
+1. 读 QUICKSTART.md（5 分钟）
+2. 按照指南启动前后端
+3. 访问 http://localhost:3000 查看应用
+4. 访问 http://localhost:8102/docs 查看 API 文档
+5. 开始编写代码！
+
+祝你开发愉快！🎉
+
