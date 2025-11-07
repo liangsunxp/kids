@@ -46,7 +46,6 @@
 | **ARCHITECTURE.md** | 系统架构设计详解 | 15 分钟 |
 | **DEVELOPMENT.md** | 完整开发指南（最详细） | 30 分钟 |
 | **PROJECT_STRUCTURE.md** | 项目结构详细说明 | 20 分钟 |
-| **TREE.txt** | 项目文件树和快速导航 | 5 分钟 |
 
 ### 🔧 配置完成
 
@@ -117,7 +116,7 @@ npm run dev
 → QUICKSTART.md
 
 **我想理解项目结构**
-→ PROJECT_STRUCTURE.md + TREE.txt
+→ PROJECT_STRUCTURE.md
 
 **我想开发新功能**
 → DEVELOPMENT.md

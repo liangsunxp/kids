@@ -671,6 +671,13 @@ python -m venv venv
 source venv/bin/activate  # macOS/Linux
 venv\Scripts\activate      # Windows
 
+# 检查激活状态（显示 (venv) 前缀）
+which python  # macOS/Linux
+where python  # Windows
+
+# 退出虚拟环境
+deactivate
+
 # 安装依赖
 pip install -r requirements.txt
 
